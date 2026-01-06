@@ -3,7 +3,7 @@
 Đồ án Frontend – Website thương mại điện tử bán đồ điện gia dụng
 (Tham khảo giao diện từ website Điện Máy Chợ Lớn)
 
-🔹 Hưng Hà – Nhóm trưởng
+🔹 Hưng Hà – Thành viên
 
 Vai trò: Giao diện trang chủ & luồng mua hàng
 
@@ -31,7 +31,7 @@ Xây dựng Trang Danh sách sản phẩm (Products)
 
 Xây dựng Trang Tìm kiếm & Lọc sản phẩm
 
-Tạo và quản lý CartContext
+Tạo và quản lý = redux
 
 Xử lý logic:
 
