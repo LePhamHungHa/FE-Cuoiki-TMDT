@@ -1,0 +1,89 @@
+[
+  {
+    "id": 1,
+    "slug": "tu-lanh-samsung-inverter-236-lit-rt22m4032by",
+    "name": "Tủ lạnh Samsung Inverter 236 lít RT22M4032BY",
+    "category": "tu-lanh",
+    "brand": "Samsung",
+    "price": 5490000,
+    "discount": 23,
+    "stock": 15,
+    "status": "active",
+    "thumbnail": "https://cdn.tgdd.vn/Products/Images/1943/153177/tu-lanh-samsung-rt22m4032by-sv-600x600.jpg",
+    "images": [
+      "https://cdn.tgdd.vn/Products/Images/1943/153177/tu-lanh-samsung-rt22m4032by-sv-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/1943/153177/tu-lanh-samsung-rt22m4032by-sv-mo-cua-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/1943/153177/tu-lanh-samsung-rt22m4032by-sv-kich-thuoc-600x600.jpg"
+    ],
+    "description": "<p>Tủ lạnh Samsung Inverter 236 lít với công nghệ Digital Inverter tiết kiệm điện năng, làm lạnh vòm giúp thực phẩm tươi ngon lâu hơn. Ngăn đông mềm -1 độ C lý tưởng để bảo quản thịt cá ăn trong ngày.</p>"
+  },
+  {
+    "id": 2,
+    "slug": "may-giat-lg-inverter-9-kg-fm1209s6w",
+    "name": "Máy giặt LG Inverter 9 kg FM1209S6W",
+    "category": "may-giat",
+    "brand": "LG",
+    "price": 6990000,
+    "discount": 33,
+    "stock": 8,
+    "status": "active",
+    "thumbnail": "https://cdn.tgdd.vn/Products/Images/1944/220087/may-giat-lg-inverter-9-kg-fm1209s6w-600x600-1-600x600.jpg",
+    "images": [
+      "https://cdn.tgdd.vn/Products/Images/1944/220087/may-giat-lg-inverter-9-kg-fm1209s6w-600x600-1-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/1944/220087/may-giat-lg-inverter-9-kg-fm1209s6w-long-giat-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/1944/220087/may-giat-lg-inverter-9-kg-fm1209s6w-bang-dieu-khien-600x600.jpg"
+    ],
+    "description": "<p>Máy giặt lồng ngang LG Inverter 9kg vận hành êm ái nhờ động cơ truyền động trực tiếp. Công nghệ giặt nước nóng diệt khuẩn, bảo vệ làn da nhạy cảm.</p>"
+  },
+  {
+    "id": 3,
+    "slug": "noi-com-dien-sharp-1-8-lit-ks-181tjv",
+    "name": "Nồi cơm điện nắp gài Sharp 1.8 lít KS-181TJV",
+    "category": "gia-dung-bep",
+    "brand": "Sharp",
+    "price": 550000,
+    "discount": 15,
+    "stock": 50,
+    "status": "active",
+    "thumbnail": "https://cdn.tgdd.vn/Products/Images/1922/75168/noi-com-nap-gai-sharp-ks-181tjv-600x600.jpg",
+    "images": [
+      "https://cdn.tgdd.vn/Products/Images/1922/75168/noi-com-nap-gai-sharp-ks-181tjv-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/1922/75168/noi-com-nap-gai-sharp-ks-181tjv-long-noi-600x600.jpg"
+    ],
+    "description": "<p>Nồi cơm điện Sharp thương hiệu Nhật Bản bền bỉ. Dung tích 1.8 lít phù hợp cho gia đình 4-6 người. Lòng nồi hợp kim nhôm tráng men chống dính.</p>"
+  },
+  {
+    "id": 4,
+    "slug": "quat-dieu-hoa-sunhouse-shd7727",
+    "name": "Quạt điều hòa Sunhouse SHD7727",
+    "category": "quat-dieu-hoa",
+    "brand": "Sunhouse",
+    "price": 3200000,
+    "discount": 28,
+    "stock": 0,
+    "status": "out_of_stock",
+    "thumbnail": "https://cdn.tgdd.vn/Products/Images/1992/200537/quat-dieu-hoa-sunhouse-shd7727-600x600.jpg",
+    "images": [
+      "https://cdn.tgdd.vn/Products/Images/1992/200537/quat-dieu-hoa-sunhouse-shd7727-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/1992/200537/quat-dieu-hoa-sunhouse-shd7727-bang-dieu-khien-600x600.jpg"
+    ],
+    "description": "<p>Quạt điều hòa công suất lớn, làm mát nhanh cho diện tích rộng. Bình chứa nước lớn 40 lít giúp làm mát liên tục trong nhiều giờ.</p>"
+  },
+  {
+    "id": 5,
+    "slug": "may-xay-sinh-to-panasonic-mx-v310kra",
+    "name": "Máy xay sinh tố Panasonic MX-V310KRA",
+    "category": "gia-dung-bep",
+    "brand": "Panasonic",
+    "price": 1250000,
+    "discount": 10,
+    "stock": 25,
+    "status": "active",
+    "thumbnail": "https://cdn.tgdd.vn/Products/Images/2074/199988/may-xay-sinh-to-panasonic-mx-v310kra-600x600.jpg",
+    "images": [
+      "https://cdn.tgdd.vn/Products/Images/2074/199988/may-xay-sinh-to-panasonic-mx-v310kra-600x600.jpg",
+      "https://cdn.tgdd.vn/Products/Images/2074/199988/may-xay-sinh-to-panasonic-mx-v310kra-coi-xay-600x600.jpg"
+    ],
+    "description": "<p>Máy xay sinh tố Panasonic với lưỡi dao răng cưa bằng thép không gỉ, xay nhuyễn đá bi dễ dàng. Cối xay thủy tinh chịu lực, an toàn cho sức khỏe.</p>"
+  }
+]
