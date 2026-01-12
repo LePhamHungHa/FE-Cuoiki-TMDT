@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Home-Cart-Checkout/HAF/Header.jsx";
+import Footer from "./Home-Cart-Checkout/HAF/Footer.jsx";
 import "./App.css";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
             element={
               <>
                 <Header />
+                <Footer />
               </>
             }
           />

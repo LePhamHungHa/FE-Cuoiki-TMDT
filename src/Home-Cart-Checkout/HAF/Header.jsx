@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import sale1 from "../img/sale1.png";
+
 import "../css/Header.css";
 
 const Header = () => {
@@ -114,6 +116,20 @@ const Header = () => {
     { name: "LIÊN HỆ", path: "/lien-he" },
   ];
 
+  const saleImages = [sale1, sale1, sale1];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) =>
+        prev === saleImages.length - 1 ? 0 : prev + 1
+      );
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -159,7 +175,7 @@ const Header = () => {
                 <div className="contact-item">
                   <span className="contact-icon">📞</span>
                   <strong>Hotline:</strong>
-                  <a href="tel:18001061">1800 1061</a>
+                  <a href="tel:18001061">7979 7979</a>
                   <span className="contact-note">(Miễn phí)</span>
                 </div>
                 <span className="contact-divider">|</span>
@@ -218,7 +234,6 @@ const Header = () => {
                     className="search-input"
                   />
                   <button type="submit" className="search-button">
-                    <span className="search-icon">🔍</span>
                     <span>TÌM KIẾM</span>
                   </button>
                 </div>
@@ -384,18 +399,32 @@ const Header = () => {
                 ))}
               </ul>
             </nav>
-
-            {/* Promo Badge */}
-            <div className="promo-container">
-              <button
-                className="promo-badge"
-                onClick={() => navigate("/khuyen-mai")}
-              >
-                <span className="badge-icon">🔥</span>
-                <span>SIÊU SALE 30.9</span>
-              </button>
-            </div>
           </div>
+        </div>
+      </div>
+
+      {/* Sale Banner Slider */}
+      <div className="sale-slider">
+        <div className="sale-slider-wrapper">
+          {saleImages.map((img, index) => (
+            <div
+              key={index}
+              className={`sale-slide ${index === currentSlide ? "active" : ""}`}
+            >
+              <img src={img} alt={`Sale ${index + 1}`} />
+            </div>
+          ))}
+        </div>
+
+        {/* Dots */}
+        <div className="sale-dots">
+          {saleImages.map((_, index) => (
+            <span
+              key={index}
+              className={`sale-dot ${index === currentSlide ? "active" : ""}`}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
         </div>
       </div>
 
