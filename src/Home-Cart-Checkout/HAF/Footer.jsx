@@ -49,15 +49,191 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  // State đơn giản
   const [email, setEmail] = useState("");
 
-  const handleNewsletterSubmit = (e) => {
+  // Hàm xử lý submit form - logic đơn giản
+  const handleSubmitNewsletter = (e) => {
     e.preventDefault();
-    if (email) {
-      alert(`Cảm ơn bạn đã đăng ký nhận tin với email: ${email}`);
-      setEmail("");
+
+    // Kiểm tra email rỗng
+    if (email.trim() === "") {
+      alert("Vui lòng nhập email!");
+      return;
     }
+
+    // Kiểm tra định dạng email cơ bản
+    if (!email.includes("@") || !email.includes(".")) {
+      alert("Email không hợp lệ!");
+      return;
+    }
+
+    // Xử lý đăng ký
+    alert(`Đăng ký thành công với email: ${email}`);
+    setEmail("");
+  };
+
+  // Lấy năm hiện tại
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  };
+
+  // Dữ liệu danh mục sản phẩm - hardcode
+  const productCategories = {
+    "ĐIỆN LẠNH": [
+      { name: "Tủ lạnh", icon: <FaSnowflake />, link: "/category/tu-lanh" },
+      { name: "Máy lạnh", icon: <FaSnowflake />, link: "/category/may-lanh" },
+      { name: "Máy giặt", icon: <FaFan />, link: "/category/may-giat" },
+      { name: "Tivi", icon: <FaTv />, link: "/category/tivi" },
+    ],
+    "GIA DỤNG": [
+      {
+        name: "Máy xay sinh tố",
+        icon: <FaBlender />,
+        link: "/category/may-xay-sinh-to",
+      },
+      {
+        name: "Nồi cơm điện",
+        icon: <FaHome />,
+        link: "/category/noi-com-dien",
+      },
+      { name: "Máy hút bụi", icon: <FaCogs />, link: "/category/may-hut-bui" },
+      {
+        name: "Thiết bị nhà bếp",
+        icon: <FaBoxOpen />,
+        link: "/category/thiet-bi-nha-bep",
+      },
+    ],
+    "ĐIỆN TỬ": [
+      {
+        name: "Điện thoại",
+        icon: <FaMobileAlt />,
+        link: "/category/dien-thoai",
+      },
+      { name: "Laptop", icon: <FaLaptop />, link: "/category/laptop" },
+      { name: "Tablet", icon: <FaTabletAlt />, link: "/category/tablet" },
+      { name: "Máy ảnh", icon: <FaCamera />, link: "/category/may-anh" },
+    ],
+    KHÁC: [
+      {
+        name: "Đồ chơi công nghệ",
+        icon: <FaGamepad />,
+        link: "/category/do-choi-cong-nghe",
+      },
+      { name: "Phụ kiện", icon: <FaTv />, link: "/category/phu-kien" },
+      { name: "Sửa chữa", icon: <FaWrench />, link: "/category/sua-chua" },
+      { name: "Quà tặng", icon: <FaGift />, link: "/category/qua-tang" },
+    ],
+  };
+
+  // Dữ liệu chính sách
+  const policies = [
+    {
+      name: "Giao hàng toàn quốc",
+      icon: <FaShippingFast />,
+      link: "/chinh-sach-giao-hang",
+    },
+    { name: "Đổi trả 30 ngày", icon: <FaExchangeAlt />, link: "/doi-tra" },
+    { name: "Trả góp 0%", icon: <FaPercent />, link: "/tra-gop" },
+    { name: "Bảo hành chính hãng", icon: <FaShieldAlt />, link: "/bao-hanh" },
+  ];
+
+  // Dữ liệu hỗ trợ khách hàng
+  const supportItems = [
+    { name: "Hướng dẫn mua hàng", icon: <FaHeadset />, link: "/ho-tro" },
+    { name: "Câu hỏi thường gặp", icon: <FaQuestionCircle />, link: "/faq" },
+    {
+      name: "Điều khoản sử dụng",
+      icon: <FaFileContract />,
+      link: "/dieu-khoan",
+    },
+    { name: "Chính sách bảo mật", icon: <FaLock />, link: "/bao-mat" },
+  ];
+
+  // Dữ liệu mạng xã hội
+  const socialLinks = [
+    { platform: "Facebook", icon: <FaFacebook />, color: "#1877f2", link: "#" },
+    { platform: "YouTube", icon: <FaYoutube />, color: "#ff0000", link: "#" },
+    { platform: "Zalo", icon: <FaComments />, color: "#0068ff", link: "#" },
+    { platform: "TikTok", icon: <FaTiktok />, color: "#000000", link: "#" },
+  ];
+
+  // Dữ liệu thông tin cửa hàng
+  const storeInfo = [
+    {
+      title: "35 CỬA HÀNG",
+      description: "Trải dài khắp TP.HCM và các tỉnh",
+      icon: <FaStore />,
+    },
+    {
+      title: "GIAO HÀNG NHANH",
+      description: "Miễn phí trong nội thành TP.HCM",
+      icon: <FaTruck />,
+    },
+    {
+      title: "MỞ CỬA 8H-22H",
+      description: "Phục vụ 7 ngày/tuần",
+      icon: <FaClock />,
+    },
+  ];
+
+  // Hàm render danh mục sản phẩm
+  const renderProductCategories = () => {
+    return Object.entries(productCategories).map(([category, items]) => (
+      <div className="category-group" key={category}>
+        <h4>{category}</h4>
+        <ul className="category-links">
+          {items.map((item, index) => (
+            <li key={index}>
+              <span className="category-icon">{item.icon}</span>
+              <a href={item.link}>{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ));
+  };
+
+  // Hàm render danh sách chính sách
+  const renderPolicyList = (items) => {
+    return (
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>
+            <span className="policy-icon">{item.icon}</span>
+            <a href={item.link}>{item.name}</a>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  // Hàm render liên kết mạng xã hội
+  const renderSocialLinks = () => {
+    return socialLinks.map((social, index) => (
+      <a
+        key={index}
+        href={social.link}
+        className={`social-link ${social.platform.toLowerCase()}`}
+        style={{ backgroundColor: social.color }}
+        aria-label={social.platform}
+      >
+        {social.icon}
+      </a>
+    ));
+  };
+
+  // Hàm render thông tin cửa hàng
+  const renderStoreInfo = () => {
+    return storeInfo.map((info, index) => (
+      <div className="info-card" key={index}>
+        <div className="info-icon">{info.icon}</div>
+        <div className="info-content">
+          <h4>{info.title}</h4>
+          <p>{info.description}</p>
+        </div>
+      </div>
+    ));
   };
 
   return (
@@ -151,142 +327,18 @@ const Footer = () => {
             <div className="footer-column">
               <h3 className="column-title">DANH MỤC SẢN PHẨM</h3>
               <div className="product-categories">
-                <div className="category-group">
-                  <h4>ĐIỆN LẠNH</h4>
-                  <ul className="category-links">
-                    <li>
-                      <FaSnowflake className="category-icon" />
-                      <a href="/category/tu-lanh">Tủ lạnh</a>
-                    </li>
-                    <li>
-                      <FaSnowflake className="category-icon" />
-                      <a href="/category/may-lanh">Máy lạnh</a>
-                    </li>
-                    <li>
-                      <FaFan className="category-icon" />
-                      <a href="/category/may-giat">Máy giặt</a>
-                    </li>
-                    <li>
-                      <FaTv className="category-icon" />
-                      <a href="/category/tivi">Tivi</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="category-group">
-                  <h4>GIA DỤNG</h4>
-                  <ul className="category-links">
-                    <li>
-                      <FaBlender className="category-icon" />
-                      <a href="/category/may-xay-sinh-to">Máy xay sinh tố</a>
-                    </li>
-                    <li>
-                      <FaHome className="category-icon" />
-                      <a href="/category/noi-com-dien">Nồi cơm điện</a>
-                    </li>
-                    <li>
-                      <FaCogs className="category-icon" />
-                      <a href="/category/may-hut-bui">Máy hút bụi</a>
-                    </li>
-                    <li>
-                      <FaBoxOpen className="category-icon" />
-                      <a href="/category/thiet-bi-nha-bep">Thiết bị nhà bếp</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="category-group">
-                  <h4>ĐIỆN TỬ</h4>
-                  <ul className="category-links">
-                    <li>
-                      <FaMobileAlt className="category-icon" />
-                      <a href="/category/dien-thoai">Điện thoại</a>
-                    </li>
-                    <li>
-                      <FaLaptop className="category-icon" />
-                      <a href="/category/laptop">Laptop</a>
-                    </li>
-                    <li>
-                      <FaTabletAlt className="category-icon" />
-                      <a href="/category/tablet">Tablet</a>
-                    </li>
-                    <li>
-                      <FaCamera className="category-icon" />
-                      <a href="/category/may-anh">Máy ảnh</a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="category-group">
-                  <h4>KHÁC</h4>
-                  <ul className="category-links">
-                    <li>
-                      <FaGamepad className="category-icon" />
-                      <a href="/category/do-choi-cong-nghe">
-                        Đồ chơi công nghệ
-                      </a>
-                    </li>
-                    <li>
-                      <FaTv className="category-icon" />
-                      <a href="/category/phu-kien">Phụ kiện</a>
-                    </li>
-                    <li>
-                      <FaWrench className="category-icon" />
-                      <a href="/category/sua-chua">Sửa chữa</a>
-                    </li>
-                    <li>
-                      <FaGift className="category-icon" />
-                      <a href="/category/qua-tang">Quà tặng</a>
-                    </li>
-                  </ul>
-                </div>
+                {renderProductCategories()}
               </div>
             </div>
 
             {/* COLUMN 3: POLICIES & SUPPORT */}
             <div className="footer-column">
               <h3 className="column-title">CHÍNH SÁCH</h3>
-              <div className="policy-links">
-                <ul>
-                  <li>
-                    <FaShippingFast className="policy-icon" />
-                    <a href="/chinh-sach-giao-hang">Giao hàng toàn quốc</a>
-                  </li>
-                  <li>
-                    <FaExchangeAlt className="policy-icon" />
-                    <a href="/doi-tra">Đổi trả 30 ngày</a>
-                  </li>
-                  <li>
-                    <FaPercent className="policy-icon" />
-                    <a href="/tra-gop">Trả góp 0%</a>
-                  </li>
-                  <li>
-                    <FaShieldAlt className="policy-icon" />
-                    <a href="/bao-hanh">Bảo hành chính hãng</a>
-                  </li>
-                </ul>
-              </div>
+              <div className="policy-links">{renderPolicyList(policies)}</div>
 
               <h3 className="column-title mt-6">HỖ TRỢ KHÁCH HÀNG</h3>
               <div className="support-links">
-                <ul>
-                  <li>
-                    <FaHeadset className="policy-icon" />
-                    <a href="/ho-tro">Hướng dẫn mua hàng</a>
-                  </li>
-                  <li>
-                    <FaQuestionCircle className="policy-icon" />
-                    <a href="/faq">Câu hỏi thường gặp</a>
-                  </li>
-                  <li>
-                    <FaFileContract className="policy-icon" />
-                    <a href="/dieu-khoan">Điều khoản sử dụng</a>
-                  </li>
-                  <li>
-                    <FaLock className="policy-icon" />
-                    <a href="/bao-mat">Chính sách bảo mật</a>
-                  </li>
-                </ul>
+                {renderPolicyList(supportItems)}
               </div>
             </div>
 
@@ -299,7 +351,7 @@ const Footer = () => {
                   Máy Chợ Lớn
                 </p>
                 <form
-                  onSubmit={handleNewsletterSubmit}
+                  onSubmit={handleSubmitNewsletter}
                   className="newsletter-form"
                 >
                   <input
@@ -308,7 +360,6 @@ const Footer = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Nhập email của bạn"
                     className="newsletter-input"
-                    required
                   />
                   <button type="submit" className="newsletter-btn">
                     <FaPaperPlane size={18} />
@@ -317,7 +368,7 @@ const Footer = () => {
                 </form>
                 <p className="newsletter-note">
                   <FaCheckCircle />
-                  <span>Cam kết không spam email</span>
+                  <span>Cam kết bảo mật mọi thông tin cá nhân của bạn</span>
                 </p>
               </div>
 
@@ -326,32 +377,7 @@ const Footer = () => {
                   <FaComments />
                   <span>KẾT NỐI VỚI CHÚNG TÔI</span>
                 </h4>
-                <div className="social-links">
-                  <a
-                    href="#"
-                    className="social-link facebook"
-                    aria-label="Facebook"
-                  >
-                    <FaFacebook size={24} />
-                  </a>
-                  <a
-                    href="#"
-                    className="social-link youtube"
-                    aria-label="YouTube"
-                  >
-                    <FaYoutube size={24} />
-                  </a>
-                  <a href="#" className="social-link zalo" aria-label="Zalo">
-                    <FaComments size={24} />
-                  </a>
-                  <a
-                    href="#"
-                    className="social-link tiktok"
-                    aria-label="TikTok"
-                  >
-                    <FaTiktok size={24} />
-                  </a>
-                </div>
+                <div className="social-links">{renderSocialLinks()}</div>
 
                 <div className="payment-methods">
                   <h4 className="payment-title">CHẤP NHẬN THANH TOÁN</h4>
@@ -396,7 +422,7 @@ const Footer = () => {
             <div className="map-wrapper">
               <iframe
                 title="Địa chỉ Điện Máy Chợ Lớn"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.317428512478!2d106.66435897590576!3d10.786826658722044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed2392c44df%3A0xba2c7e8baf9c1c3e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1765540655461!5m2!1svi!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.214525515988!2d106.78918677590661!3d10.871281657435143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRQLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1765540655461!5m2!1svi!2s"
                 width="100%"
                 height="350"
                 style={{ border: 0, borderRadius: "12px" }}
@@ -405,37 +431,7 @@ const Footer = () => {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
 
-              <div className="map-info">
-                <div className="info-card">
-                  <div className="info-icon">
-                    <FaStore size={24} />
-                  </div>
-                  <div className="info-content">
-                    <h4>35 CỬA HÀNG</h4>
-                    <p>Trải dài khắp TP.HCM và các tỉnh</p>
-                  </div>
-                </div>
-
-                <div className="info-card">
-                  <div className="info-icon">
-                    <FaTruck size={24} />
-                  </div>
-                  <div className="info-content">
-                    <h4>GIAO HÀNG NHANH</h4>
-                    <p>Miễn phí trong nội thành TP.HCM</p>
-                  </div>
-                </div>
-
-                <div className="info-card">
-                  <div className="info-icon">
-                    <FaClock size={24} />
-                  </div>
-                  <div className="info-content">
-                    <h4>MỞ CỬA 8H-22H</h4>
-                    <p>Phục vụ 7 ngày/tuần</p>
-                  </div>
-                </div>
-              </div>
+              <div className="map-info">{renderStoreInfo()}</div>
             </div>
           </div>
         </div>
@@ -447,7 +443,8 @@ const Footer = () => {
           <div className="bottom-content">
             <div className="copyright">
               <p>
-                © {currentYear} ĐIỆN MÁY CHỢ LỚN. Tất cả các quyền được bảo lưu.
+                © {getCurrentYear()} ĐIỆN MÁY CHỢ LỚN. Tất cả các quyền được bảo
+                lưu.
               </p>
               <p>
                 Giấy phép kinh doanh: 0123456789 do Sở KHĐT TP.HCM cấp ngày

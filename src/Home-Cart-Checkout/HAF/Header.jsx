@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import sale1 from "../img/sale1.png";
-
+import sale2 from "../img/sale2.png";
+import sale3 from "../img/sale3.png";
 import "../css/Header.css";
 
 const Header = () => {
@@ -9,105 +10,81 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const categories = [
-    {
-      id: 1,
-      name: "TỦ LẠNH",
-      icon: "❄️",
-      link: "/category/tu-lanh",
-      brands: [
-        "SAMSUNG",
-        "LG",
-        "TOSHIBA",
-        "PANASONIC",
-        "AQUA",
-        "SHARP",
-        "ELECTROLUX",
-        "HITACHI",
-      ],
-    },
-    {
-      id: 2,
-      name: "MÁY GIẶT",
-      icon: "👕",
-      link: "/category/may-giat",
-      brands: [
-        "SAMSUNG",
-        "LG",
-        "TOSHIBA",
-        "PANASONIC",
-        "AQUA",
-        "ELECTROLUX",
-        "HITACHI",
-      ],
-    },
-    {
-      id: 3,
-      name: "TV - MÀN HÌNH",
-      icon: "📺",
-      link: "/category/tv-man-hinh",
-      brands: [
-        "SAMSUNG",
-        "LG",
-        "SONY",
-        "TOSHIBA",
-        "TCL",
-        "CASPER",
-        "SHARP",
-        "PANASONIC",
-      ],
-    },
-    {
-      id: 4,
-      name: "MÁY LẠNH",
-      icon: "🌡️",
-      link: "/category/may-lanh",
-      brands: [
-        "DAIKIN",
-        "PANASONIC",
-        "LG",
-        "SAMSUNG",
-        "Midea",
-        "CASPER",
-        "TOSHIBA",
-        "HITACHI",
-      ],
-    },
-    {
-      id: 5,
-      name: "GIA DỤNG",
-      icon: "🏠",
-      link: "/category/gia-dung",
-      brands: [
-        "SAMSUNG",
-        "PANASONIC",
-        "TOSHIBA",
-        "SHARP",
-        "ELECTROLUX",
-        "HITACHI",
-        "AQUA",
-      ],
-    },
-    {
-      id: 6,
-      name: "ĐỒ GIA DỤNG",
-      icon: "🍳",
-      link: "/category/do-gia-dung",
-      brands: [
-        "SUNHOUSE",
-        "ELECTROLUX",
-        "KANGAROO",
-        "PHILIPS",
-        "TOSHIBA",
-        "PANASONIC",
-        "SHARP",
-      ],
-    },
+  // Dữ liệu danh mục
+  const productCategories = [
+    { id: 1, name: "TỦ LẠNH", icon: "❄️", link: "/category/tu-lanh" },
+    { id: 2, name: "MÁY GIẶT", icon: "👕", link: "/category/may-giat" },
+    { id: 3, name: "TV - MÀN HÌNH", icon: "📺", link: "/category/tv-man-hinh" },
+    { id: 4, name: "MÁY LẠNH", icon: "🌡️", link: "/category/may-lanh" },
+    { id: 5, name: "GIA DỤNG", icon: "🏠", link: "/category/gia-dung" },
+    { id: 6, name: "ĐỒ GIA DỤNG", icon: "🍳", link: "/category/do-gia-dung" },
   ];
 
+  // Dữ liệu thương hiệu
+  const brandData = {
+    1: [
+      "SAMSUNG",
+      "LG",
+      "TOSHIBA",
+      "PANASONIC",
+      "AQUA",
+      "SHARP",
+      "ELECTROLUX",
+      "HITACHI",
+    ],
+    2: [
+      "SAMSUNG",
+      "LG",
+      "TOSHIBA",
+      "PANASONIC",
+      "AQUA",
+      "ELECTROLUX",
+      "HITACHI",
+    ],
+    3: [
+      "SAMSUNG",
+      "LG",
+      "SONY",
+      "TOSHIBA",
+      "TCL",
+      "CASPER",
+      "SHARP",
+      "PANASONIC",
+    ],
+    4: [
+      "DAIKIN",
+      "PANASONIC",
+      "LG",
+      "SAMSUNG",
+      "Midea",
+      "CASPER",
+      "TOSHIBA",
+      "HITACHI",
+    ],
+    5: [
+      "SAMSUNG",
+      "PANASONIC",
+      "TOSHIBA",
+      "SHARP",
+      "ELECTROLUX",
+      "HITACHI",
+      "AQUA",
+    ],
+    6: [
+      "SUNHOUSE",
+      "ELECTROLUX",
+      "KANGAROO",
+      "PHILIPS",
+      "TOSHIBA",
+      "PANASONIC",
+      "SHARP",
+    ],
+  };
+
   // Menu chính
-  const mainMenu = [
+  const navItems = [
     { name: "TRANG CHỦ", path: "/" },
     { name: "KHUYẾN MÃI", path: "/khuyen-mai" },
     { name: "TRẢ GÓP 0%", path: "/tra-gop" },
@@ -116,57 +93,74 @@ const Header = () => {
     { name: "LIÊN HỆ", path: "/lien-he" },
   ];
 
-  const saleImages = [sale1, sale1, sale1];
+  // Banner slider
+  const banners = [sale1, sale2, sale3];
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-
+  // Xử lý auto slide
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) =>
-        prev === saleImages.length - 1 ? 0 : prev + 1
-      );
+    const slideInterval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
     }, 4000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(slideInterval);
+  }, [banners.length]);
 
-  const handleSearch = (e) => {
+  // Tìm kiếm sản phẩm
+  const submitSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    if (searchQuery.trim() !== "") {
+      navigate(`/search?q=${searchQuery}`);
       setSearchQuery("");
     }
   };
 
-  const handleCartClick = () => {
+  // Chuyển hướng đến giỏ hàng
+  const goToCart = () => {
     navigate("/cart");
   };
 
-  const handleAccountClick = () => {
+  // Chuyển hướng đến tài khoản
+  const goToAccount = () => {
     navigate("/account");
   };
 
-  // Hàm xử lý khi click vào danh mục chính
-  const handleCategoryClick = (link) => {
-    navigate(link);
+  // Chọn danh mục
+  const selectCategory = (categoryLink) => {
+    navigate(categoryLink);
     setActiveCategory(null);
   };
 
-  // Hàm xử lý khi click vào thương hiệu
-  const handleBrandClick = (brandName) => {
+  // Chọn thương hiệu
+  const selectBrand = (brandName) => {
     navigate(`/brand/${brandName.toLowerCase()}`);
     setActiveCategory(null);
   };
 
-  // Hàm xử lý khi click vào danh mục trên mobile
-  const handleMobileCategoryClick = (category) => {
+  // Chọn danh mục trên mobile
+  const selectMobileCategory = (category) => {
     navigate(category.link);
     setShowMobileMenu(false);
   };
 
+  // Lấy thương hiệu hiển thị
+  const getDisplayBrands = () => {
+    if (typeof activeCategory === "number") {
+      return brandData[activeCategory] || [];
+    }
+    return [
+      "SAMSUNG",
+      "LG",
+      "TOSHIBA",
+      "PANASONIC",
+      "SHARP",
+      "DAIKIN",
+      "ELECTROLUX",
+    ];
+  };
+
   return (
     <header className="main-header">
-      {/* Top Bar */}
+      {/* Thanh thông tin trên cùng */}
       <div className="top-bar">
         <div className="container">
           <div className="top-bar-content">
@@ -207,11 +201,10 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Header */}
+      {/* Phần header chính */}
       <div className="header-main">
         <div className="container">
           <div className="header-content">
-            {/* Logo */}
             <div className="header-logo">
               <Link to="/" className="logo-link">
                 <div className="logo-text">
@@ -222,9 +215,8 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Search Bar */}
             <div className="header-search">
-              <form onSubmit={handleSearch} className="search-form">
+              <form onSubmit={submitSearch} className="search-form">
                 <div className="search-input-group">
                   <input
                     type="text"
@@ -273,10 +265,9 @@ const Header = () => {
               </form>
             </div>
 
-            {/* Action Buttons */}
             <div className="header-actions">
               <div className="action-item">
-                <button onClick={handleAccountClick} className="action-button">
+                <button onClick={goToAccount} className="action-button">
                   <span className="action-icon">👤</span>
                   <div className="action-info">
                     <span className="action-label">Tài khoản</span>
@@ -285,7 +276,7 @@ const Header = () => {
                 </button>
               </div>
               <div className="action-item cart-button">
-                <button onClick={handleCartClick} className="action-button">
+                <button onClick={goToCart} className="action-button">
                   <span className="action-icon cart-icon">🛒</span>
                   <div className="action-info">
                     <span className="action-label">Giỏ hàng</span>
@@ -296,7 +287,6 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Mobile Menu Toggle */}
             <button
               className="mobile-menu-toggle"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -307,11 +297,10 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Menu điều hướng */}
       <div className="main-nav">
         <div className="container">
           <div className="nav-content">
-            {/* Categories Dropdown */}
             <div
               className="categories-dropdown"
               onMouseEnter={() => setActiveCategory(true)}
@@ -326,7 +315,7 @@ const Header = () => {
               {activeCategory && (
                 <div className="categories-menu">
                   <div className="categories-list">
-                    {categories.map((category) => (
+                    {productCategories.map((category) => (
                       <div
                         key={category.id}
                         className="category-menu-item"
@@ -334,7 +323,7 @@ const Header = () => {
                       >
                         <button
                           className="category-header"
-                          onClick={() => handleCategoryClick(category.link)}
+                          onClick={() => selectCategory(category.link)}
                         >
                           <span className="category-icon">{category.icon}</span>
                           <span className="category-name">{category.name}</span>
@@ -344,53 +333,28 @@ const Header = () => {
                     ))}
                   </div>
 
-                  {/* Bảng thương hiệu cố định bên phải */}
                   <div className="brands-section">
                     <h3 className="brands-title">THƯƠNG HIỆU</h3>
                     <div className="brands-list">
-                      {typeof activeCategory === "number"
-                        ? // Hiển thị thương hiệu của danh mục đang hover
-                          categories
-                            .find((c) => c.id === activeCategory)
-                            ?.brands.map((brand, idx) => (
-                              <button
-                                key={idx}
-                                type="button"
-                                className="brand-link"
-                                onClick={() => handleBrandClick(brand)}
-                              >
-                                {brand}
-                              </button>
-                            ))
-                        : // Hiển thị thương hiệu nổi bật chung (khi mới mở menu)
-                          [
-                            "SAMSUNG",
-                            "LG",
-                            "TOSHIBA",
-                            "PANASONIC",
-                            "SHARP",
-                            "DAIKIN",
-                            "ELECTROLUX",
-                          ].map((brand, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              className="brand-link"
-                              onClick={() => handleBrandClick(brand)}
-                            >
-                              {brand}
-                            </button>
-                          ))}
+                      {getDisplayBrands().map((brand, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          className="brand-link"
+                          onClick={() => selectBrand(brand)}
+                        >
+                          {brand}
+                        </button>
+                      ))}
                     </div>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Navigation Links */}
             <nav className="nav-menu-container">
               <ul className="nav-menu">
-                {mainMenu.map((item, idx) => (
+                {navItems.map((item, idx) => (
                   <li key={idx} className="nav-item">
                     <Link to={item.path} className="nav-link">
                       {item.name}
@@ -403,22 +367,21 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Sale Banner Slider */}
+      {/* Banner khuyến mãi */}
       <div className="sale-slider">
         <div className="sale-slider-wrapper">
-          {saleImages.map((img, index) => (
+          {banners.map((banner, index) => (
             <div
               key={index}
               className={`sale-slide ${index === currentSlide ? "active" : ""}`}
             >
-              <img src={img} alt={`Sale ${index + 1}`} />
+              <img src={banner} alt={`Khuyến mãi ${index + 1}`} />
             </div>
           ))}
         </div>
 
-        {/* Dots */}
         <div className="sale-dots">
-          {saleImages.map((_, index) => (
+          {banners.map((_, index) => (
             <span
               key={index}
               className={`sale-dot ${index === currentSlide ? "active" : ""}`}
@@ -428,11 +391,10 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Menu mobile */}
       {showMobileMenu && (
         <div className="mobile-menu-overlay">
           <div className="mobile-menu-content">
-            {/* Mobile Close Button */}
             <div className="mobile-menu-header">
               <button
                 className="mobile-menu-close"
@@ -442,9 +404,8 @@ const Header = () => {
               </button>
             </div>
 
-            {/* Mobile Search */}
             <div className="mobile-search">
-              <form onSubmit={handleSearch} className="mobile-search-form">
+              <form onSubmit={submitSearch} className="mobile-search-form">
                 <input
                   type="text"
                   value={searchQuery}
@@ -458,14 +419,13 @@ const Header = () => {
               </form>
             </div>
 
-            {/* Mobile Categories */}
             <div className="mobile-categories">
               <h3 className="mobile-categories-title">DANH MỤC SẢN PHẨM</h3>
-              {categories.map((category) => (
+              {productCategories.map((category) => (
                 <div key={category.id} className="mobile-category-item">
                   <button
                     className="mobile-category-header"
-                    onClick={() => handleMobileCategoryClick(category)}
+                    onClick={() => selectMobileCategory(category)}
                   >
                     <span className="mobile-category-icon">
                       {category.icon}
@@ -478,9 +438,8 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Links */}
             <div className="mobile-menu-links">
-              {mainMenu.map((item, idx) => (
+              {navItems.map((item, idx) => (
                 <Link
                   key={idx}
                   to={item.path}
@@ -492,12 +451,11 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Mobile Actions */}
             <div className="mobile-actions">
               <button
                 className="mobile-action-btn"
                 onClick={() => {
-                  handleAccountClick();
+                  goToAccount();
                   setShowMobileMenu(false);
                 }}
               >
@@ -507,7 +465,7 @@ const Header = () => {
               <button
                 className="mobile-action-btn cart-btn"
                 onClick={() => {
-                  handleCartClick();
+                  goToCart();
                   setShowMobileMenu(false);
                 }}
               >
@@ -515,19 +473,6 @@ const Header = () => {
                 <span>Giỏ hàng</span>
                 <span className="mobile-cart-badge">0</span>
               </button>
-            </div>
-
-            {/* Mobile Contact Info */}
-            <div className="mobile-contact">
-              <div className="mobile-contact-item">
-                <span className="mobile-contact-icon">📞</span>
-                <div>
-                  <div className="mobile-contact-phone">1800 1061</div>
-                  <div className="mobile-contact-label">
-                    Gọi mua hàng (miễn phí)
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
